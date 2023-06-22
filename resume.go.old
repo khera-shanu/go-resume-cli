@@ -1,0 +1,254 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"strconv"
+
+	"github.com/signintech/gopdf"
+)
+
+// Resume and Template structure
+type Resume struct {
+	Name       string   `json:"name"`
+	Title      string   `json:"title"`
+	Contact    Contact  `json:"contact"`
+	Summary    string   `json:"summary"`
+	Experience []Job    `json:"experience"`
+	Education  []School `json:"education"`
+	Skills     []Skill  `json:"skills"`
+}
+
+type Contact struct {
+	Email   string `json:"email"`
+	Phone   string `json:"phone"`
+	Address string `json:"address"`
+}
+
+type Job struct {
+	Title       string `json:"title"`
+	Company     string `json:"company"`
+	Location    string `json:"location"`
+	Dates       string `json:"dates"`
+	Description string `json:"description"`
+}
+
+type School struct {
+	Degree      string `json:"degree"`
+	SchoolName  string `json:"school"`
+	Location    string `json:"location"`
+	Dates       string `json:"dates"`
+	Description string `json:"description"`
+}
+
+type Skill struct {
+	Name  string `json:"name"`
+	Level string `json:"level"`
+}
+
+type Template struct {
+	Page   Page      `json:"page"`
+	Font   Font      `json:"font"`
+	Layout []Element `json:"layout"`
+}
+
+type Page struct {
+	Width  string `json:"width"`
+	Height string `json:"height"`
+	Margin Margin `json:"margin"`
+}
+
+type Margin struct {
+	Top    string `json:"top"`
+	Right  string `json:"right"`
+	Bottom string `json:"bottom"`
+	Left   string `json:"left"`
+}
+
+type Font struct {
+	Family string            `json:"family"`
+	Size   map[string]string `json:"size"`
+	Color  map[string]string `json:"color"`
+}
+
+type Element struct {
+	Type    string           `json:"type"`
+	Title   string           `json:"title,omitempty"`
+	Content []ElementContent `json:"content,omitempty"`
+}
+
+type ElementContent struct {
+	Element  string `json:"element"`
+	Text     string `json:"text,omitempty"`
+	FontSize string `json:"font-size,omitempty"`
+	Key      string `json:"key,omitempty"`
+	Data     string `json:"data,omitempty"`
+}
+
+func createResumePdf(resume Resume, tmpl Template) error {
+	pdf := gopdf.GoPdf{}
+	pdf.Start(gopdf.Config{PageSize: *gopdf.PageSizeA4})
+	pdf.AddPage()
+
+	fontFamilyMap := map[string]string{
+		"regular": "fonts/Roboto-Regular.ttf",
+		"bold":    "fonts/Roboto-Bold.ttf",
+		"italic":  "fonts/Roboto-Italic.ttf",
+	}
+
+	// Load fonts
+	for name, path := range fontFamilyMap {
+		err := pdf.AddTTFFont(name, path)
+		if err != nil {
+			return fmt.Errorf("Error loading font: %v", err)
+		}
+	}
+
+	// Iterate layout
+	y := atof(tmpl.Page.Margin.Top)
+	for _, element := range tmpl.Layout {
+		switch element.Type {
+		case "header":
+			err := drawHeader(&pdf, resume, tmpl, element, &y)
+			if err != nil {
+				return fmt.Errorf("Error drawing header: %v", err)
+			}
+		case "section":
+			err := drawSection(&pdf, resume, tmpl, element, &y)
+			if err != nil {
+				return fmt.Errorf("Error drawing section: %v", err)
+			}
+		}
+	}
+
+	pdf.WritePdf("resume.pdf")
+	return nil
+}
+
+func drawHeader(pdf *gopdf.GoPdf, resume Resume, tmpl Template, element Element, y *float64) error {
+	for _, content := range element.Content {
+		switch content.Element {
+		case "text":
+			switch content.Text {
+			case "{name}":
+				content.Text = resume.Name
+			case "{title}":
+				content.Text = resume.Title
+			}
+			err := setFont(pdf, tmpl, content.FontSize)
+			if err != nil {
+				return fmt.Errorf("Error setting font size: %v", err)
+			}
+			pdf.SetX(atof(tmpl.Page.Margin.Left))
+			pdf.Cell(nil, content.Text)
+			*y += pdf.GetTextHeight(content.Text) + 5
+		case "contact":
+			contactInfo := fmt.Sprintf("%s | %s | %s", resume.Contact.Email, resume.Contact.Phone, resume.Contact.Address)
+			err := setFont(pdf, tmpl, content.FontSize)
+			if err != nil {
+				return fmt.Errorf("Error setting font size: %v", err)
+			}
+			pdf.SetX(atof(tmpl.Page.Margin.Left))
+			pdf.Cell(nil, contactInfo)
+			*y += pdf.GetTextHeight(contactInfo) + 5
+		}
+	}
+	return nil
+}
+
+func drawSection(pdf *gopdf.GoPdf, resume Resume, tmpl Template, element Element, y *float64) error {
+	err := setFont(pdf, tmpl, "large")
+	if err != nil {
+		return fmt.Errorf("Error setting font size: %v", err)
+	}
+	pdf.SetX(atof(tmpl.Page.Margin.Left))
+	pdf.Cell(nil, element.Title)
+	*y += pdf.GetTextHeight(element.Title) + 5
+
+	for _, content := range element.Content {
+		switch content.Element {
+		case "text":
+			err := setFont(pdf, tmpl, content.FontSize)
+			if err != nil {
+				return fmt.Errorf("Error setting font size: %v", err)
+			}
+			pdf.SetX(atof(tmpl.Page.Margin.Left))
+			pdf.Cell(nil, content.Text)
+			*y += pdf.GetTextHeight(content.Text) + 5
+		case "list":
+			var listData interface{}
+			switch content.Data {
+			case "experience":
+				listData = resume.Experience
+			case "education":
+				listData = resume.Education
+			case "skills":
+				listData = resume.Skills
+			}
+
+			elemBytes, _ := json.Marshal(element)
+			for _, item := range listData.([]Item) {
+				itemElem := Element{}
+				json.Unmarshal(elemBytes, &itemElem)
+				for _, itemContent := range itemElem.Content {
+					if itemContent.Key != "" {
+						itemContent.Text = item[itemContent.Key]
+					}
+					err = drawElement(pdf, tmpl, itemContent, Element{}, y)
+					if err != nil {
+						return fmt.Errorf("Error drawing list item element: %v", err)
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func setFont(pdf *gopdf.GoPdf, tmpl Template, size string) error {
+	err := pdf.SetFont(fmt.Sprintf("font-%s", size), "", 0)
+	if err != nil {
+		return fmt.Errorf("Error setting font: %v", err)
+	}
+	return nil
+}
+
+func atof(str string) float64 {
+	n, _ := strconv.ParseFloat(str, 64)
+	return n
+}
+
+func main() {
+	var resume Resume
+	var tmpl Template
+
+	// Read resume.json
+	resumeJson, err := ioutil.ReadFile("resume.json")
+	if err != nil {
+		log.Fatalf("Error reading resume.json file: %v", err)
+	}
+
+	err = json.Unmarshal(resumeJson, &resume)
+	if err != nil {
+		log.Fatalf("Error unmarshalling resume.json data: %v", err)
+	}
+
+	// Read template.json
+	templateJson, err := ioutil.ReadFile("template.json")
+	if err != nil {
+		log.Fatalf("Error reading template.json file: %v", err)
+	}
+
+	err = json.Unmarshal(templateJson, &tmpl)
+	if err != nil {
+		log.Fatalf("Error unmarshalling template.json data: %v", err)
+	}
+
+	// Generate PDF
+	err = createResumePdf(resume, tmpl)
+	if err != nil {
+		log.Fatalf("Error generating PDF: %v", err)
+	}
+}

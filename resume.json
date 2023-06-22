@@ -1,0 +1,283 @@
+{
+    "name": "Shanu Khera",
+    "title": "Senior Software Developer",
+    "picture": "./assets/shanu_khera.jpeg",
+    "contacts": [
+        {
+            "icon": "./assets/email.png",
+            "value": "hire-me@kherashanu.com"
+        },
+        {
+            "icon": "./assets/phone.png",
+            "value": "+91 85888 11 807"
+        },
+        {
+            "icon": "./assets/location.png",
+            "value": "New Delhi - India"
+        }
+    ],
+    "socials": [
+        {
+            "link": "https://www.linkedin.com/in/khera-shanu/",
+            "icon": "./assets/linkedin.png",
+            "name": "LinkedIn"
+        },
+        {
+            "link": "https://www.github.com/khera-shanu",
+            "icon": "./assets/github.png",
+            "name": "GitHub"
+        },
+        {
+            "link": "https://www.twitter.com/kherashanu",
+            "icon": "./assets/twitter.png",
+            "name": "Twitter"
+        },
+        {
+            "link": "https://www.kherashanu.com",
+            "icon": "./assets/website.png",
+            "name": "Website"
+        }
+    ],
+    "summary": {
+      "icon": "./assets/text.png",
+      "value": "Pragmatic, motivated and experienced software engineer with a strong track record of designing and\nimplementing software solutions across various domains with total 10+ years of experience."
+    },
+    "experience": [
+        {
+            "title": "Senior Software Developer",
+            "company": "Nextroll Inc., USA",
+            "location": "Remote | WFH",
+            "dates": "April 2021 - Present",
+            "description": "* Enhanced company's data platform by developing and maintaining cutting-edge backend\nand frontend systems.\n* Spearheaded diverse projects encompassing data ingestion, processing, and visualization."
+        },
+        {
+            "title": "Senior Technical Staff",
+            "company": "Avior Wealth, Australia",
+            "location": "Remote | WFH",
+            "dates": "January 2018 - April 2021",
+            "description": "* Orchestrated the establishment of a comprehensive software development ecosystem,\nfrom hiring technical staff to setting up infrastructure.\n* Pioneered the creation of a sophisticated Wealth Management App, including a seamless\n Frontend App, Website, Backend, CI/CD, and more."
+        },
+        {
+            "title": "Tech Founder",
+            "company": "Fyraway, India",
+            "location": "Remote | WFH",
+            "dates": "June 2019 - March 2020",
+            "description": "* Founded and successfully sold an innovative Ed-tech startup,\noffering a gamified coding learning platform for young learners aged 6-14."
+        },
+        {
+            "title": "Head of Tech Curriculum",
+            "company": "Navgurukul, India)",
+            "location": "Hybrid: Onsite and WFH",
+            "dates": "April 2018 - March 2019",
+            "description": "* Designed and implemented a robust curriculum for a residential program,\nimparting essential computer science skills to over 30 underprivileged students aged 18-25."
+        },
+        {
+            "title": "Software Engineer",
+            "company": "Red Panda Innovation Labs, India",
+            "location": "Onsite",
+            "dates": "February 2017 - October 2017",
+            "description": "* Developed and maintained advanced backend and frontend systems for the\ncompany's largest IoT client, driving innovation in the industry."
+        },
+        {
+            "title": "Member of Technical Staff",
+            "company": "Octro Inc., India",
+            "location": "Onsite",
+            "dates": "August 2015 - February 2017",
+            "description": "Pioneered the creation of a scalable internal build system, optimizing productivity and\nefficiency for the company's mobile game development."
+        },
+        {
+            "title": "Software Engineer",
+            "company": "Aricent Technologies, India",
+            "location": "Onsite",
+            "dates": "September 2013 - August 2015",
+            "description": "* Contributed to the development of cutting-edge telecom products, specializing in the\nSS7 protocol stack and enhancing the company's technology portfolio."
+        }
+    ],
+    "education": [
+        {
+            "degree": "Bachelor of technology in Computer Science",
+            "school": "Uttarakhand Technical University, India",
+            "dates": "2009 - 2013",
+            "description": "Consistently ranked in the top 5% of my class, demonstrating exceptional aptitude\nin mathematics and programming."
+        }
+    ],
+    "projects": [
+      {
+        "name": "Dexter | A Bytecode-based Virtual Machine | C",
+        "description": "A turing-complete object-oriented programming language written in C.",
+        "link": "https://www.github.com/khera-shanu/dexter"
+      },
+      {
+        "name": "Giganoto | Community-driven e-learning platform | Python and Next JS.",
+        "description": "An AI-assistance community-driven e-learning platform to support underprivileged learners.",
+        "link": "https://www.github.com/giganoto/"
+      },
+      {
+        "name": "Asha | A proof-of-concept distributed file system | Go.",
+        "description": "Simple distributed file system showcasing decentralized file storage and management.",
+        "link": "https://www.github.com/khera-shanu/asha"
+      }
+    ],
+    "skills": [
+        {
+          "category": "Languages",
+          "items": [
+            {
+              "name": "Python",
+              "level": "Advanced",
+              "icon": "./assets/python.png"
+            },
+            {
+              "name": "JavaScript",
+              "level": "Advanced",
+              "icon": "./assets/javascript.png"
+            },
+            {
+              "name": "TypeScript",
+              "level": "Advanced",
+              "icon": "./assets/typescript.png"
+            },
+            {
+              "name": "C",
+              "level": "Advanced",
+              "icon": "./assets/c.png"
+            },
+            {
+              "name": "SQL",
+              "level": "Advanced",
+              "icon": "./assets/sql.png"
+            },
+            {
+              "name": "Bash",
+              "level": "Intermediate",
+              "icon": "./assets/bash.png"
+            },
+            {
+              "name": "Erlang",
+              "level": "Intermediate",
+              "icon": "./assets/erlang.png"
+            },
+            {
+              "name": "Go",
+              "level": "Intermediate",
+              "icon": "./assets/go.png"
+            }
+          ]
+        },
+        {
+          "category": "Frameworks",
+          "items": [
+            {
+              "name": "Flask",
+              "level": "Advanced",
+              "icon": "./assets/flask.png"
+            },
+            {
+              "name": "React",
+              "level": "Advanced",
+              "icon": "./assets/react.png"
+            },
+            {
+              "name": "React Native",
+              "level": "Advanced",
+              "icon": "./assets/react.png"
+            },
+            {
+              "name": "Next.js",
+              "level": "Intermediate",
+              "icon": "./assets/nextjs.png"
+            },
+            {
+              "name": "Gin",
+              "level": "Intermediate",
+              "icon": "./assets/gin.png"
+            }
+          ]
+        },
+        {
+          "category": "Tools",
+          "items": [
+            {
+              "name": "Git",
+              "level": "Advanced",
+              "icon": "./assets/git.png"
+            },
+            {
+              "name": "Docker",
+              "level": "Intermediate",
+              "icon": "./assets/docker.png"
+            },
+            {
+              "name": "Jenkins",
+              "level": "Intermediate",
+              "icon": "./assets/jenkins.png"
+            },
+            {
+              "name": "AWS",
+              "level": "Intermediate",
+              "icon": "./assets/aws.png"
+            },
+            {
+              "name": "Linux",
+              "level": "Intermediate",
+              "icon": "./assets/linux.png"
+            },
+            {
+              "name": "Vim",
+              "level": "Intermediate",
+              "icon": "./assets/vim.png"
+            },
+            {
+              "name": "Postman",
+              "level": "Intermediate",
+              "icon": "./assets/postman.png"
+            },
+            {
+              "name": "Swagger",
+              "level": "Intermediate",
+              "icon": "./assets/swagger.png"
+            },
+            {
+              "name": "Jira",
+              "level": "Intermediate",
+              "icon": "./assets/jira.png"
+            },
+            {
+              "name": "Firebase",
+              "level": "Intermediate",
+              "icon": "./assets/firebase.png"
+            },
+            {
+              "name": "Postgres",
+              "level": "Intermediate",
+              "icon": "./assets/postgres.png"
+            },
+            {
+              "name": "Redis",
+              "level": "Intermediate",
+              "icon": "./assets/redis.png"
+            },
+            {
+              "name": "ClickHouse",
+              "level": "Intermediate",
+              "icon": "./assets/clickhouse.png"
+            },
+            {
+              "name": "Apache Spark",
+              "level": "Intermediate",
+              "icon": "./assets/spark.png"
+            },
+            {
+              "name": "Apache Airflow",
+              "level": "Intermediate",
+              "icon": "./assets/airflow.png"
+            },
+            {
+              "name": "Apache Kafka",
+              "level": "Intermediate",
+              "icon": "./assets/kafka.png"
+            }
+          ]
+        }
+    ]
+}

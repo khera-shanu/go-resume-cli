@@ -1,0 +1,156 @@
+{
+    "page": {
+       "width": "8.5in",
+       "height": "11in",
+       "margin": {
+          "top": "0.5in",
+          "right": "0.5in",
+          "bottom": "0.5in",
+          "left": "0.5in"
+       }
+    },
+    "font": {
+       "family": "Arial, sans-serif",
+       "size": {
+          "default": "12pt",
+          "small": "10pt",
+          "large": "14pt"
+       },
+       "color": {
+          "default": "#333",
+          "header": "#444",
+          "highlight": "#007bff"
+       }
+    },
+    "layout": [
+       {
+          "type": "header",
+          "content": [
+             {
+                "element": "text",
+                "text": "John Smith",
+                "font-size": "large"
+             },
+             {
+                "element": "text",
+                "text": "Software Developer",
+                "font-size": "default"
+             },
+             {
+                "element": "contact",
+                "font-size": "default"
+             }
+          ]
+       },
+       {
+          "type": "section",
+          "title": "Summary",
+          "content": [
+             {
+                "element": "text",
+                "text": "Motivated and experienced software developer with strong skills in Python, JavaScript, and Java. Proven ability to design and implement software solutions to meet business needs. Excellent communication skills and ability to work effectively in a team environment.",
+                "font-size": "default"
+             }
+          ]
+       },
+       {
+          "type": "section",
+          "title": "Experience",
+          "content": [
+             {
+                "element": "list",
+                "data": "experience",
+                "font-size": "default",
+                "item": [
+                   {
+                      "element": "text",
+                      "key": "title",
+                      "font-size": "large"
+                   },
+                   {
+                      "element": "text",
+                      "key": "company",
+                      "font-size": "large"
+                   },
+                   {
+                      "element": "text",
+                      "key": "location",
+                      "font-size": "default"
+                   },
+                   {
+                      "element": "text",
+                      "key": "dates",
+                      "font-size": "default"
+                   },
+                   {
+                      "element": "text",
+                      "key": "description",
+                      "font-size": "default"
+                   }
+                ]
+             }
+          ]
+       },
+       {
+          "type": "section",
+          "title": "Education",
+          "content": [
+             {
+                "element": "list",
+                "data": "education",
+                "font-size": "default",
+                "item": [
+                   {
+                      "element": "text",
+                      "key": "degree",
+                      "font-size": "large"
+                   },
+                   {
+                      "element": "text",
+                      "key": "school",
+                      "font-size": "large"
+                   },
+                   {
+                      "element": "text",
+                      "key": "location",
+                      "font-size": "default"
+                   },
+                   {
+                      "element": "text",
+                      "key": "dates",
+                      "font-size": "default"
+                   },
+                   {
+                      "element": "text",
+                      "key": "description",
+                      "font-size": "default"
+                   }
+                ]
+             }
+          ]
+       },
+       {
+          "type": "section",
+          "title": "Skills",
+          "content": [
+             {
+                "element": "list",
+                "data": "skills",
+                "font-size": "default",
+                "item": [
+                   {
+                      "element": "text",
+                      "key": "name",
+                      "font-size": "large"
+                   },
+                   {
+                      "element": "text",
+                      "key": "level",
+                      "font-size": "default"
+                   }
+                ]
+             }
+          ]
+       }
+    ]
+ }
